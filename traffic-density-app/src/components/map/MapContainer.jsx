@@ -14,7 +14,7 @@ const Map = () => {
       shadowUrl: '/leaflet/marker-shadow.png',
     })
   }, [])
-git a
+
   return (
     <div className="h-[70vh] w-full">
       <MapContainer
