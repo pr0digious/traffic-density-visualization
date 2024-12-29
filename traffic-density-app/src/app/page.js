@@ -1,12 +1,6 @@
-import dynamic from 'next/dynamic'
 import CitySearch from '@/components/search/CitySearch'
 import TimeSelector from '@/components/search/TimeSelector'
-
-// Dynamic import for Map (client component)
-const MapWithNoSSR = dynamic(
-  () => import('@/components/map/MapContainer'),
-  { ssr: false }
-)
+import DynamicMap from '@/components/map/DynamicMap'
 
 export default function Home() {
   return (
@@ -20,7 +14,7 @@ export default function Home() {
         </div>
 
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <MapWithNoSSR />
+          <DynamicMap />
         </div>
       </div>
     </main>
