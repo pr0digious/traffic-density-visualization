@@ -2,11 +2,11 @@
 
 import { useEffect } from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
+import HeatMapLayer from './HeatMapLayer'
 import 'leaflet/dist/leaflet.css'
 
-const Map = () => {
+const Map = ({ trafficData }) => {
   useEffect(() => {
-    // Fix for leaflet icons in Next.js
     delete L.Icon.Default.prototype._getIconUrl
     L.Icon.Default.mergeOptions({
       iconRetinaUrl: '/leaflet/marker-icon-2x.png',
@@ -27,6 +27,7 @@ const Map = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <HeatMapLayer data={trafficData} />
       </MapContainer>
     </div>
   )
