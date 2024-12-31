@@ -11,7 +11,7 @@ export default function Home() {
         </h1>
         
         <div className="search-container my-4">
-          <CitySearch />
+          <CitySearch/>
           <TimeSelector />
         </div>
 
