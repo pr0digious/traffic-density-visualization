@@ -2,12 +2,11 @@
 
 import dynamic from 'next/dynamic'
 
-// Dynamic import for Map
 const MapWithNoSSR = dynamic(
-  () => import('@/components/map/MapContainer'),
+  () => import('./MapContainer'),
   { ssr: false }
 )
 
-export default function DynamicMap() {
-  return <MapWithNoSSR />
+export default function DynamicMap({ selectedCity, selectedTime }) {
+  return <MapWithNoSSR selectedCity={selectedCity} selectedTime={selectedTime} />
 }
