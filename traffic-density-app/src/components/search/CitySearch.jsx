@@ -2,17 +2,17 @@
 
 import { useState } from 'react'
 import { Combobox } from '@headlessui/react'
+import trafficData from '@/data/trafficData.json'
 
 export default function CitySearch({ onCitySelect }) {
   const [query, setQuery] = useState('')
   const [selectedCity, setSelectedCity] = useState(null)
 
-  // In production, this would come from your API
-  const cities = [
-    { id: 'san_francisco', name: 'San Francisco' },
-    { id: 'oakland', name: 'Oakland' },
-    // Add more cities
-  ]
+  // Convert your JSON data into a list of cities
+  const cities = Object.entries(trafficData.cities).map(([id, cityData]) => ({
+    id,
+    name: cityData.name
+  }))
 
   const filteredCities = query === ''
     ? cities
@@ -34,7 +34,7 @@ export default function CitySearch({ onCitySelect }) {
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search for a city..."
         />
-        <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-lg">
+        <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-lg z-50">
           {filteredCities.map((city) => (
             <Combobox.Option
               key={city.id}
