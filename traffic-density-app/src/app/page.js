@@ -6,6 +6,7 @@ import CitySearch from '@/components/search/CitySearch'
 import TimeSelector from '@/components/search/TimeSelector'
 import TrafficLegend from '@/components/map/TrafficLegend'
 
+
 export default function Home() {
   const [selectedCity, setSelectedCity] = useState(null)
   const [selectedTime, setSelectedTime] = useState(8) // Default to 8 AM
@@ -35,6 +36,7 @@ export default function Home() {
           />
           <TrafficLegend />
         </div>
+        <h1 className="text-2xl font-bold mb-4">Traffic Data Tester</h1>
       </div>
     </main>
   )
