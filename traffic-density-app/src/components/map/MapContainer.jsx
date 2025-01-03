@@ -5,27 +5,51 @@ import { MapContainer, TileLayer } from 'react-leaflet'
 import HeatMapLayer from './HeatMapLayer'
 import 'leaflet/dist/leaflet.css'
 
-// Add sample data at the top of the file
-const sampleData = [
-  {
-    location: {
-      coordinates: [-122.4194, 37.7749]  // San Francisco
+// Sample traffic data directly in component
+const trafficData = {
+  "trafficData": [
+    {
+      "location": {
+        "coordinates": [-122.4194, 37.7749],
+        "city": "San Francisco",
+        "county": "San Francisco County"
+      },
+      "trafficDensity": 75
     },
-    trafficDensity: 75
-  },
-  {
-    location: {
-      coordinates: [-122.2712, 37.8044]  // Oakland
+    {
+      "location": {
+        "coordinates": [-122.2712, 37.8044],
+        "city": "Oakland",
+        "county": "Alameda County"
+      },
+      "trafficDensity": 65
     },
-    trafficDensity: 60
-  },
-  {
-    location: {
-      coordinates: [-122.0838, 37.3861]  // San Jose
+    {
+      "location": {
+        "coordinates": [-122.0838, 37.3861],
+        "city": "San Jose",
+        "county": "Santa Clara County"
+      },
+      "trafficDensity": 80
     },
-    trafficDensity: 85
-  }
-]
+    {
+      "location": {
+        "coordinates": [-122.3321, 37.5329],
+        "city": "Redwood City",
+        "county": "San Mateo County"
+      },
+      "trafficDensity": 55
+    },
+    {
+      "location": {
+        "coordinates": [-122.0363, 37.9030],
+        "city": "Walnut Creek",
+        "county": "Contra Costa County"
+      },
+      "trafficDensity": 45
+    }
+  ]
+}
 
 const Map = () => {
   useEffect(() => {
@@ -41,7 +65,7 @@ const Map = () => {
     <div className="h-[70vh] w-full">
       <MapContainer
         center={[37.7749, -122.4194]}
-        zoom={10}
+        zoom={9}
         className="h-full w-full"
         scrollWheelZoom={true}
       >
@@ -49,7 +73,7 @@ const Map = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <HeatMapLayer data={sampleData} />
+        <HeatMapLayer data={trafficData.trafficData} />
       </MapContainer>
     </div>
   )

@@ -1,43 +1,35 @@
 'use client'
 
 import { useState } from 'react'
-import { format } from 'date-fns'
 
-export default function TimeSelector({ onTimeChange }) {
-  const [selectedTime, setSelectedTime] = useState('')
-  const [isPlaying, setIsPlaying] = useState(false)
+export default function TimeSlider({ onTimeChange }) {
+  const [time, setTime] = useState(8) // Default to 8 AM
 
-  const handleTimeChange = (time) => {
-    setSelectedTime(time)
-    onTimeChange?.(time)
+  const handleChange = (e) => {
+    const newTime = parseInt(e.target.value)
+    setTime(newTime)
+    onTimeChange?.(newTime)
   }
 
-  const handlePlayPause = () => {
-    setIsPlaying(!isPlaying)
-    if (!isPlaying) {
-      // Start time animation
-      startTimeAnimation()
-    }
-  }
-
-  const startTimeAnimation = () => {
-    // Implement time animation logic here
+  const formatTime = (hour) => {
+    const period = hour >= 12 ? 'PM' : 'AM'
+    const displayHour = hour > 12 ? hour - 12 : hour
+    return `${displayHour}:00 ${period}`
   }
 
   return (
-    <div className="flex items-center space-x-4">
+    <div className="w-full">
       <input
-        type="time"
-        className="rounded-lg border px-4 py-2"
-        value={selectedTime}
-        onChange={(e) => handleTimeChange(e.target.value)}
+        type="range"
+        min="4"
+        max="22"
+        value={time}
+        onChange={handleChange}
+        className="w-full"
       />
-      <button
-        onClick={handlePlayPause}
-        className="rounded-lg bg-blue-500 px-4 py-2 text-white"
-      >
-        {isPlaying ? 'Pause' : 'Play'}
-      </button>
+      <div className="text-center mt-2">
+        {formatTime(time)}
+      </div>
     </div>
   )
 }
