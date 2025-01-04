@@ -5,15 +5,15 @@ export default function TrafficLegend() {
         <div className="space-y-2">
           <div className="flex items-center">
             <div className="w-4 h-4 bg-green-500 rounded mr-2"></div>
-            <span>Light (&lt; 20 cars/mile)</span>
+            <span>Light Traffic (0-20 cars per mile)</span>
           </div>
           <div className="flex items-center">
             <div className="w-4 h-4 bg-yellow-500 rounded mr-2"></div>
-            <span>Moderate (20-45 cars/mile)</span>
+            <span>Moderate Traffic (21-44 cars per mile)</span>
           </div>
           <div className="flex items-center">
             <div className="w-4 h-4 bg-red-500 rounded mr-2"></div>
-            <span>Heavy (&gt; 45 cars/mile)</span>
+            <span>Heavy Traffic (45 cars per mile)</span>
           </div>
         </div>
       </div>

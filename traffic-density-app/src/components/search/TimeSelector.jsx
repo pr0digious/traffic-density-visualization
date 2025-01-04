@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-export default function TimeSlider({ onTimeChange }) {
+export default function TimeSelector({ onTimeChange }) {
   const [time, setTime] = useState(8) // Default to 8 AM
 
   const handleChange = (e) => {
@@ -18,7 +18,11 @@ export default function TimeSlider({ onTimeChange }) {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full space-y-2">
+      <div className="flex justify-between text-sm text-gray-600">
+        <span>4:00 AM</span>
+        <span>10:00 PM</span>
+      </div>
       <input
         type="range"
         min="4"
@@ -27,8 +31,8 @@ export default function TimeSlider({ onTimeChange }) {
         onChange={handleChange}
         className="w-full"
       />
-      <div className="text-center mt-2">
-        {formatTime(time)}
+      <div className="text-center font-medium">
+        Current Time: {formatTime(time)}
       </div>
     </div>
   )

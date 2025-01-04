@@ -1,40 +1,41 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useMap } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet.heat'
-import { useMap } from 'react-leaflet'
+import { getCityHeatPoints } from '@/data/city-traffic-data'
 
-export default function HeatMapLayer({ data }) {
+export default function HeatMapLayer({ selectedTime }) {
   const map = useMap()
 
   useEffect(() => {
-    if (!data || !map) return
+    if (!map) return
 
-    // Convert data to format expected by leaflet.heat
-    const points = data.map(point => [
-      point.location.coordinates[1], // latitude
-      point.location.coordinates[0], // longitude
-      point.trafficDensity / 100    // intensity (normalized to 0-1)
+    // Get heat points for current time
+    const points = getCityHeatPoints(selectedTime).map(point => [
+      point.lat,
+      point.lng,
+      point.intensity
     ])
 
     // Create heat layer
     const heatLayer = L.heatLayer(points, {
-      radius: 25,
-      blur: 15,
+      radius: 35,
+      blur: 25,
       maxZoom: 10,
+      max: 1.0,
       gradient: {
-        0.4: 'blue',
-        0.6: 'lime',
-        0.8: 'yellow',
-        1.0: 'red'
+        0.2: '#22c55e', // green for low traffic
+        0.5: '#eab308', // yellow for medium traffic
+        0.8: '#ef4444'  // red for high traffic
       }
     }).addTo(map)
 
     return () => {
       map.removeLayer(heatLayer)
     }
-  }, [data, map])
+  }, [selectedTime, map])
 
   return null
 }
